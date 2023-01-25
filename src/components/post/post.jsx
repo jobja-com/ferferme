@@ -38,7 +38,7 @@ import { destinationsPrivacy } from '../select-utils';
 import { Icon } from '../fontawesome-icons';
 import { UserPicture } from '../user-picture';
 import { SubmitModeHint } from '../submit-mode-hint';
-import { SubmittableTextarea } from '../submittable-textarea';
+import { SubmittableTextarea } from '../mention-textarea';
 
 import { UnhideOptions, HideLink } from './post-hides-ui';
 import PostMoreLink from './post-more-link';
@@ -174,8 +174,31 @@ class Post extends Component {
     this.props.enableComments(this.props.id);
   };
 
+  doTranslate = () => {
+    const xhttp = new XMLHttpRequest();
+    xhttp.open(
+      'GET',
+      `https://script.google.com/macros/s/AKfycbyTMpl4oDrxRoCMSKl2-3HSyQZojjvJxJ2QGlO3M21ybqTzpLwXWlaO5BdznBVZcyTfZA/exec?text=${this.props.body}`,
+      false,
+    );
+    xhttp.send();
+    document.querySelector(
+      `#b-${this.props.id}`,
+    ).innerHTML = `<span class="Linkify" dir="auto" role="region">${xhttp.responseText}</span>`;
+    document.querySelector(`#tr-${this.props.id}`).style.display = 'none';
+    document.querySelector(`#u-tr-${this.props.id}`).style.display = 'inline';
+  };
+
+  undoTranslate = () => {
+    document.querySelector(
+      `#b-${this.props.id}`,
+    ).innerHTML = `<span class="Linkify" dir="auto" role="region">${this.props.body}</span>`;
+    document.querySelector(`#tr-${this.props.id}`).style.display = 'inline';
+    document.querySelector(`#u-tr-${this.props.id}`).style.display = 'none';
+  };
+
   handlePostTextChange = (e) => {
-    this.setState({ editingText: e.target.value });
+    this.setState({ editingText: e });
   };
 
   toggleEditingPost = () => {
@@ -402,6 +425,17 @@ class Post extends Component {
         false
       );
 
+    const translate = (
+      <ButtonLink className="post-action" onClick={this.doTranslate}>
+        Translate
+      </ButtonLink>
+    );
+
+    const untranslate = (
+      <ButtonLink className="post-action" onClick={this.undoTranslate}>
+        Original
+      </ButtonLink>
+    );
     // "More" menu
     const moreLink = (
       <PostMoreLink
@@ -481,6 +515,16 @@ class Post extends Component {
                   {this.renderHideLink()}
                 </span>
               )}
+              <span className="post-footer-item" id={`tr-${this.props.id}`}>
+                {translate}
+              </span>
+              <span
+                style={{ display: 'none' }}
+                className="post-footer-item"
+                id={`u-tr-${this.props.id}`}
+              >
+                {untranslate}
+              </span>
               <span className="post-footer-item">{moreLink}</span>
             </span>
           </div>
@@ -640,12 +684,14 @@ class Post extends Component {
                 </div>
               ) : (
                 <div className="post-text">
-                  <PieceOfText
-                    text={props.body}
-                    readMoreStyle={props.readMoreStyle}
-                    highlightTerms={props.highlightTerms}
-                    showMedia={this.props.showMedia}
-                  />
+                  <span id={`b-${this.props.id}`}>
+                    <PieceOfText
+                      text={props.body}
+                      readMoreStyle={props.readMoreStyle}
+                      highlightTerms={props.highlightTerms}
+                      showMedia={this.props.showMedia}
+                    />
+                  </span>
                 </div>
               )}
             </div>
