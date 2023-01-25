@@ -426,6 +426,12 @@ body,
     }
   }
 
+  .subscriptions-request-alert {
+    border: 1px solid $text-color;
+    color: $text-color;
+    background-color: $bg-color-lighter;
+  }
+  
   .bottom-navbar {
     background-color: #202020;
 
