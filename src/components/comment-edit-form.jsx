@@ -1,6 +1,7 @@
 /* global CONFIG */
 import { useMemo, useCallback, useState, useRef, useEffect, forwardRef } from 'react';
 import cn from 'classnames';
+import GifPicker from 'gif-picker-react';
 
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { initialAsyncState } from '../redux/async-helpers';
@@ -13,6 +14,8 @@ import { useUploader, useFileChooser } from './hooks/uploads';
 import { Icon } from './fontawesome-icons';
 import { SubmitModeHint } from './submit-mode-hint';
 import { SubmittableTextarea } from './submittable-textarea';
+import { OverlayPopup } from './overlay-popup';
+import { tenor } from './tenor-api-key';
 
 export const CommentEditForm = forwardRef(function CommentEditForm(
   {
@@ -27,6 +30,7 @@ export const CommentEditForm = forwardRef(function CommentEditForm(
 ) {
   const input = useRef(null);
   const [text, setText] = useState(initialText);
+  const [gifActive, setgifActive] = useState(false);
   const onChange = useCallback((e) => setText(e.target.value), []);
   const canSubmit = useMemo(
     () => !submitStatus.loading && text.trim() !== '',
@@ -95,6 +99,11 @@ export const CommentEditForm = forwardRef(function CommentEditForm(
 
   const disabled = !canSubmit || submitStatus.loading || filesLoading;
 
+  function setGif(gif) {
+    setText(`${text} ${gif}`);
+    setgifActive(false);
+  }
+
   return (
     <div className="comment-body" role="form">
       <PreventPageLeaving prevent={canSubmit || submitStatus.loading} />
@@ -151,6 +160,34 @@ export const CommentEditForm = forwardRef(function CommentEditForm(
         >
           <Icon icon={faPaperclip} />
         </ButtonLink>
+        <span className="comment-file-button iconic-button">{' - '}</span>
+        <ButtonLink
+          className="comment-file-button iconic-button"
+          title="Add Gif"
+          /* eslint-disable-next-line react/jsx-no-bind */
+          onClick={() => {
+            setgifActive(!gifActive);
+          }}
+        >
+          GIF
+        </ButtonLink>
+        {gifActive && (
+          <>
+            <OverlayPopup
+              /* eslint-disable-next-line react/jsx-no-bind */
+              close={() => {
+                setgifActive(false);
+              }}
+            >
+              <GifPicker
+                /* eslint-disable-next-line react/jsx-no-bind */
+                onGifClick={(gif) => setGif(gif.url)}
+                theme="auto"
+                tenorApiKey={tenor[0].api_key}
+              />
+            </OverlayPopup>
+          </>
+        )}
 
         {submitStatus.loading && <Throbber className="comment-throbber" />}
         {submitStatus.error && <span className="comment-error">{submitStatus.errorText}</span>}
