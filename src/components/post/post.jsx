@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import _ from 'lodash';
 import dateFormat from 'date-fns/format';
 import * as Sentry from '@sentry/react';
+import GifPicker from 'gif-picker-react';
 import {
   faExclamationTriangle,
   faLock,
@@ -39,6 +40,8 @@ import { Icon } from '../fontawesome-icons';
 import { UserPicture } from '../user-picture';
 import { SubmitModeHint } from '../submit-mode-hint';
 import { SubmittableTextarea } from '../mention-textarea';
+import { OverlayPopup } from '../overlay-popup';
+import { tenor } from '../tenor-api-key';
 
 import { UnhideOptions, HideLink } from './post-hides-ui';
 import PostMoreLink from './post-more-link';
@@ -64,6 +67,12 @@ class Post extends Component {
     editingAttachments: [],
     dropzoneDisabled: false,
     unHideOpened: false,
+    gifActive: false,
+  };
+
+  setGif = (gif) => {
+    this.setState({ editingText: `${this.state.editingText} ${gif}` });
+    this.setState({ gifActive: false });
   };
 
   handleDropzoneInit = (d) => {
@@ -648,8 +657,36 @@ class Post extends Component {
                       >
                         <Icon icon={faPaperclip} className="upload-icon" /> Add photos or files
                       </span>
+                      {' | '}
+                      <span
+                        className="post-edit-attachments"
+                        //disabled={this.state.gifs}
+                        role="button"
+                        /* eslint-disable-next-line react/jsx-no-bind */
+                        onClick={() => {
+                          this.setState({ gifActive: !this.state.gifActive });
+                        }}
+                      >
+                        GIF
+                      </span>
                     </div>
-
+                    {this.state.gifActive && (
+                      <>
+                        <OverlayPopup
+                          /* eslint-disable-next-line react/jsx-no-bind */
+                          close={() => {
+                            this.setState({ gifActive: false });
+                          }}
+                        >
+                          <GifPicker
+                            /* eslint-disable-next-line react/jsx-no-bind */
+                            onGifClick={(gif) => this.setGif(gif.url)}
+                            theme="auto"
+                            tenorApiKey={tenor[0].api_key}
+                          />
+                        </OverlayPopup>
+                      </>
+                    )}
                     <SubmitModeHint input={this.textareaRef} className="post-edit-hint" />
 
                     <div className="post-edit-buttons">
