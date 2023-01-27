@@ -16,7 +16,7 @@ import { Throbber } from './throbber';
 import { Icon } from './fontawesome-icons';
 import { ButtonLink } from './button-link';
 import { MoreWithTriangle } from './more-with-triangle';
-import { SubmittableTextarea } from './submittable-textarea';
+import { SubmittableTextarea } from './mention-textarea';
 import { OverlayPopup } from './overlay-popup';
 import { tenor } from './tenor-api-key';
 
@@ -137,7 +137,7 @@ export default class CreatePost extends Component {
   };
 
   onPostTextChange = (e) => {
-    this.setState({ postText: e.target.value }, this.checkCreatePostAvailability);
+    this.setState({ postText: e }, this.checkCreatePostAvailability);
   };
 
   attLoadingStarted = () => this.setState({ attLoading: true });
