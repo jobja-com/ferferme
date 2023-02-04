@@ -1,6 +1,6 @@
 # Usage
 
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FFreeFeed%2Ffreefeed-react-client.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FFreeFeed%2Ffreefeed-react-client?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FFerFerMe%2Fferferme.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FFerFerMe%2Fferferme?ref=badge_shield)
 
 [Node.js](https://nodejs.org) 14 or 16 is supported.
 
