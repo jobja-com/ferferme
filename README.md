@@ -41,4 +41,4 @@ example) you can create an empty `.no_husky` file in the root directory of proje
 
 ## Stargazers over time
 
-[![Stargazers over time](https://starchart.cc/mazafard/x-ui.svg)](https://starchart.cc/mazafard/x-ui)
+[![Stargazers over time](https://starchart.cc/ferferme/ferferme.svg)](https://starchart.cc/ferferme/ferferme)
