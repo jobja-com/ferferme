@@ -6611,6 +6611,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"get-input-selection@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "get-input-selection@npm:1.1.4"
+  checksum: 9247c4232b43e7b040f49247fe8c389796e603f182ce9280eb74540e04f8f9489ff87aeaa305baae1d3f423e35f3080e93e44738eed8127a0cadedcaa4c4d75f
+  languageName: node
+  linkType: hard
+
 "get-intrinsic@npm:^1.0.2, get-intrinsic@npm:^1.1.1, get-intrinsic@npm:^1.1.3":
   version: 1.1.3
   resolution: "get-intrinsic@npm:1.1.3"
@@ -6650,6 +6657,16 @@ __metadata:
     call-bind: ^1.0.2
     get-intrinsic: ^1.1.1
   checksum: 9ceff8fe968f9270a37a1f73bf3f1f7bda69ca80f4f80850670e0e7b9444ff99323f7ac52f96567f8b5f5fbe7ac717a0d81d3407c7313e82810c6199446a5247
+  languageName: node
+  linkType: hard
+
+"gif-picker-react@npm:^1.1.0":
+  version: 1.3.0
+  resolution: "gif-picker-react@npm:1.3.0"
+  peerDependencies:
+    react: ">=17"
+    react-dom: ">=17"
+  checksum: ccc1d275ebb597f5e109d6500677d365fe736db6a40e86970529dc596fc2929a16d2a18dd97513b408eb230ad1e5e7d28c7d3a00a2a193ff98f7975a44b24718
   languageName: node
   linkType: hard
 
@@ -11786,6 +11803,8 @@ __metadata:
     final-form: ~4.20.8
     focus-trap-react: ~8.9.2
     focus-visible: ~5.2.0
+    get-input-selection: ^1.1.4
+    gif-picker-react: ^1.1.0
     html-webpack-plugin: ~5.5.0
     husky: ~8.0.3
     identity-obj-proxy: ~3.0.0
@@ -11846,6 +11865,7 @@ __metadata:
     stylelint-scss: ~4.3.0
     tabbable: ~5.2.1
     terser-webpack-plugin: ~5.3.6
+    textarea-caret: ^3.1.0
     ua-parser-js: ~1.0.32
     unexpected: ~13.1.0
     unexpected-react: ~6.0.2
@@ -13696,6 +13716,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"textarea-caret@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "textarea-caret@npm:3.1.0"
+  checksum: ddefbd3078f7181d0433e69c9595ed16f64cef01c110856b4c24fe03bc2560f373a39db1c85bd3a0e65017e27b7f4034864cd6a355b8e5057c5f1a2100c0f583
+  languageName: node
+  linkType: hard
+
 "throat@npm:^6.0.1":
   version: 6.0.2
   resolution: "throat@npm:6.0.2"
@@ -14767,9 +14794,9 @@ __metadata:
   linkType: hard
 
 "word-wrap@npm:^1.2.3, word-wrap@npm:~1.2.3":
-  version: 1.2.3
-  resolution: "word-wrap@npm:1.2.3"
-  checksum: 30b48f91fcf12106ed3186ae4fa86a6a1842416df425be7b60485de14bec665a54a68e4b5156647dec3a70f25e84d270ca8bc8cd23182ed095f5c7206a938c1f
+  version: 1.2.4
+  resolution: "word-wrap@npm:1.2.4"
+  checksum: 8f1f2e0a397c0e074ca225ba9f67baa23f99293bc064e31355d426ae91b8b3f6b5f6c1fc9ae5e9141178bb362d563f55e62fd8d5c31f2a77e3ade56cb3e35bd1
   languageName: node
   linkType: hard
 
